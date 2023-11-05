@@ -1,13 +1,14 @@
-import { fetchBreeds, fetchCatByBreed } from './cat-api';
+import {
+  fetchBreeds,
+  fetchCatByBreed,
+  select,
+  catInfo,
+  loader,
+} from './cat-api';
 import Notiflix from 'notiflix';
-import SlimSelect from 'slim-select'
 
-const select = document.querySelector('.breed-select');
-const catInfo = document.querySelector('.cat-info');
-const loader = document.querySelector('.loader');
-const selectId = document.querySelector('#select');
 
-window.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('load', () => {
   fetchBreeds()
     .then(breeds => {
       loader.style.display = 'none';
@@ -21,11 +22,13 @@ window.addEventListener('DOMContentLoaded', () => {
     })
     .catch(error => {
       loader.style.display = 'none';
-      Notiflix.Notify.failure("Oops! Something went wrong! Try reloading the page!");
+      Notiflix.Notify.failure(
+        'Oops! Something went wrong! Try reloading the page!'
+      );
     });
 });
 
-select.addEventListener('change', (e) => {
+select.addEventListener('change', e => {
   const selectedBreedId = e.target.value;
 
   fetchCatByBreed(selectedBreedId)
@@ -36,7 +39,9 @@ select.addEventListener('change', (e) => {
     })
     .catch(error => {
       loader.style.display = 'none';
-      Notiflix.Notify.failure("Oops! Something went wrong! Try reloading the page!");
+      Notiflix.Notify.failure(
+        'Oops! Something went wrong! Try reloading the page!'
+      );
     });
 });
 
@@ -55,4 +60,3 @@ function createMarkup(catData) {
     )
     .join('');
 }
-
