@@ -14,7 +14,7 @@ export function fetchBreeds() {
     loader.style.display = 'block';
     select.style.display = 'none';
     err.style.display = 'none';
-    axios.defaults.headers.common['x-api-key'] = API_KEY;
+    // axios.defaults.headers.common['x-api-key'] = API_KEY;
     return fetch(`${BASE_URL}/breeds`)
       .then((response) => {
         if (!response.ok) {
@@ -29,7 +29,7 @@ export function fetchBreeds() {
     loader.style.display = 'block';
     catInfo.style.display = 'none';
     axios.defaults.headers.common['x-api-key'] = API_KEY;
-    return fetch(`${BASE_URL}/images/search?breed_ids=${breedId}`)
+    return fetch(`${BASE_URL}/images/search?api_key=${API_KEY}&breed_ids=${breedId}`)
     .then((response) => {
         if (!response.ok) {
             throw Error(response.status);
